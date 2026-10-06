@@ -25,7 +25,53 @@ public class DCCharacter{
     @Enumerated(EnumType.STRING)
     private Roles role;
 
-   @Positive 
-   private int age;
+    @Positive 
+    private int age;
+
+    public DCCharacter(){
+
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public Roles getRoles(){
+        return role;
+    }
+
+    public void setRoles(Roles role){
+        this.role = role;
+    }
+
+    public int getAge(){
+        return age;
+    }
+
+    public void setAge(int age){
+        this.age = age;
+    }
+
+    
+
+    
+
+    
 
 }
