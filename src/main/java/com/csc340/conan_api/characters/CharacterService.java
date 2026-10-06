@@ -21,13 +21,29 @@ public class CharacterService {
         return repository.findById(id).orElseThrow(() -> new CharacterNotFoundException(id));
     }
 
-    public List<DCCharacter> findByRoles(Roles role){
-        return repository.findByRoles(role);
+    public List<DCCharacter> findByRoles(Roles roles){
+        return repository.findByRoles(roles);
     }
 
     public DCCharacter create(DCCharacter dcCharacter){
         return repository.save(dcCharacter);
     }
+
+    public List<DCCharacter> search(String name,Roles roles){
+        boolean hasName = name != null && !name.isBlank();
+
+        if(hasName && roles != null){
+            return repository.findByNameContainingIgnoreCaseAndRoles(name,roles);
+        }
+        if(hasName){
+            return repository.findByNameContainingIgnoreCase(name.trim());
+        }
+        if(roles!=null){
+            return repository.findByRoles(roles);
+        }
+        return repository.findAll();
+    }
+
 
     public DCCharacter update(Long id, DCCharacter updated){
         DCCharacter existing = findById(id);

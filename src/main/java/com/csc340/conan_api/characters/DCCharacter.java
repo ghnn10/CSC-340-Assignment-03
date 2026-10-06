@@ -23,7 +23,7 @@ public class DCCharacter{
 
     @NotNull 
     @Enumerated(EnumType.STRING)
-    private Roles role;
+    private Roles roles;
 
     @Positive 
     private int age;
@@ -53,11 +53,11 @@ public class DCCharacter{
     }
 
     public Roles getRoles(){
-        return role;
+        return roles;
     }
 
-    public void setRoles(Roles role){
-        this.role = role;
+    public void setRoles(Roles roles){
+        this.roles = roles;
     }
 
     public int getAge(){
