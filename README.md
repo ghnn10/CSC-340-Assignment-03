@@ -33,6 +33,7 @@ HPPT request
 Controller    - maps URLs to methods, validates input, returns HTTP responses
     |
 Service       - business logic and orchestration, throws domain exceptions
+    |
 Repository    - data access (Spring Data JPA), generates SQL
     |
 Entity        - Java class mapped to the `characters` table
@@ -60,6 +61,7 @@ src/main/resources/
 **DCCharacter** (table `characters`)
 
 | Field | Type | Rules |
+|-------|------|-------|
 | `id` | Long | Generated automatically |
 | `name` | String | Required, not blank |
 | `description` | String | Required, not blank |
@@ -84,7 +86,7 @@ Base path: `/api/characters`
 
 | Parameter | Example | Behavior |
 |-----------|---------|----------|
-| `name` | `?name=a` | Partial, case-insensitive match ('a' finds "Haibara Ai", "Takagi Wataru", and "Akai Shuichi") |
+| `name` | `?name=a` | Partial, case-insensitive match ('a' finds "Takagi Wataru", and "Akai Shuichi") |
 | `roles` | `?roles=FBI` | Exact match on  `DETECTIVE`, `FBI`, `CIVILIAN`, `BLACK_ORGANIZATION`, or `POLICE` |
 
 Blank or missing parameters are ignored.
@@ -134,7 +136,7 @@ ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-jar", "app.jar"]
 2. Push the repository to GitHub.
 3. In Render, create a **Web Service**, connect the repo, choose the **Docker** runtime and the **Free** instance type.
 4. Add the  `SPRING_DATASOURCE_URL` environment variable (value only, no quotes).
-5. Deploy, then open
+5. Deploy, then open `https://detective-conan-characters.onrender.com/api/characters`
 
 ### Free-tier notes
 
