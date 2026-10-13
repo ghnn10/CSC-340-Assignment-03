@@ -100,6 +100,7 @@ Content-Type: application/json
 {
     "age": 17,
     "description": "The main character of the manga - a brilliant high school detective who was shrunk by a mysterious crime syndicate.",
+    "name": "Kudo Shinichi",
     "roles": "DETECTIVE"
 }
 ```
