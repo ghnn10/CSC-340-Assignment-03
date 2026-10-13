@@ -25,6 +25,10 @@ public class CharacterService {
         return repository.findByRoles(roles);
     }
 
+    public List<DCCharacter> findByNameContainingIgnoreCase(String name){
+        return repository.findByNameContainingIgnoreCase(name);
+    }
+
     public DCCharacter create(DCCharacter dcCharacter){
         return repository.save(dcCharacter);
     }
@@ -58,8 +62,4 @@ public class CharacterService {
         findById(id);   // throws 404 if missing
         repository.deleteById(id);
     }
-
-
-    
-    
 }

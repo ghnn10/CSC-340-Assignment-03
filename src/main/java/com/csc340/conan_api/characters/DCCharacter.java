@@ -26,7 +26,7 @@ public class DCCharacter{
     private Roles roles;
 
     @Positive 
-    private int age;
+    private Integer age;
 
     public DCCharacter(){
 
@@ -60,11 +60,11 @@ public class DCCharacter{
         this.roles = roles;
     }
 
-    public int getAge(){
+    public Integer getAge(){
         return age;
     }
 
-    public void setAge(int age){
+    public void setAge(Integer age){
         this.age = age;
     }
 
