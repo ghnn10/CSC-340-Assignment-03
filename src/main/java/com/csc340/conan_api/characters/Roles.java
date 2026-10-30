@@ -6,5 +6,4 @@ public enum Roles {
     CIVILIAN,
     BLACK_ORGANIZATION,
     POLICE;
-    
 }
