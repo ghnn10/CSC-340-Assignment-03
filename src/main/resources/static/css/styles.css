@@ -1,0 +1,182 @@
+:root {
+    --primary-color: #000000;
+    --secondary-color: rgb(193, 216, 236);
+    --accent-color: #6091eb;
+}
+
+body {
+    font-family: "Lucida Console", "Courier New", monospace;
+    background-color: rgb(26, 25, 25);
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.box{
+    box-sizing: border-box;
+}
+
+.title-text{
+    color:rgb(134 239 172);
+}
+
+.light-content{
+    color:rgba(187, 247, 208, .649);
+}
+
+.gray-content{
+    color:rgb(107 114 128);
+}
+.card{
+    background-color: #d8d8d8;
+}
+
+.navbar{
+    margin-bottom: 10px;
+    background-color: var(--accent-color) !important;
+    font-weight: 600;
+}
+
+.navbar ul li a {
+    color:rgb(193, 216, 236);
+    text-decoration: none;
+}
+
+.navbar ul li a:hover {
+    color: black;
+}
+
+#navbarNav{
+    margin-right: 0;
+    justify-content: end;
+}
+
+.nav-item{
+    padding: 0 10px;
+}
+
+.container-fluid{
+    margin: 0 10px;
+}
+
+.page-header h1{
+    font-weight: bolder;
+}
+
+.search-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+#filterBox:hover{
+    box-shadow: 2px 2px 2px 2px #e8eaec;
+}
+
+.search-bar{
+    flex: 1;
+    min-width: 150px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.clear-btn{
+    padding: 8px 16px;
+    border-radius: 5px;
+    flex: 0 0 auto;
+    width: auto;
+}
+
+@media (max-width: 600px) {
+  .clear-btn {
+    flex: 1 1 100%;
+    width: 100%; 
+  }
+}
+
+.custom-fit {
+  height: 250px; /* Adjust this to make the image taller or shorter */
+  width: 100%;
+  object-fit: cover; /* Prevents the image from squishing */
+}
+
+.btn-custom {
+  background-color: var(--secondary-color);
+  color:#6091eb;
+  margin-top: auto;
+}
+
+.btn-custom:hover{
+    background-color: rgb(214, 52, 79);
+    color: #000000;
+}
+
+
+#charactersCard:hover{
+    transform: scale(1.05);
+    box-shadow:  rgba(0, 0, 0, 0.3);
+}
+
+.badge{
+    background-color: #6091eb;
+    color: white;
+    display: inline-flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 10px 10px;
+}
+
+
+.about-thumbnail-img,
+.img-fluid{
+    max-width: 100%;
+    height: auto;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+.story-detail{
+    text-align: justify; 
+    text-align-last:left;
+}
+
+#view-gallery-btn{
+    background-color:white;
+    font-weight: 600;
+}
+
+#view-gallery-btn:hover{
+    background-color: #000000;
+    color: white;
+}
+
+#new-character-form{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+#form-submit-btn,
+#form-cancel-btn{
+    width: 100%;
+    padding: 12px;
+}
+#form-submit-btn{
+    background-color:rgba(187, 247, 208, .649) ;
+}
+
+#back-btn,
+#detail-card-header,
+#detail-role{
+    background-color: rgb(189, 230, 216);
+
+}
+
+
+
+footer{
+    background-color: #6091eb;
+    width: 100%;
+    bottom: 0;
+    color: var(--secondary-color);
+}
