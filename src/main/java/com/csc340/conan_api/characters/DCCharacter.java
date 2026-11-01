@@ -28,6 +28,16 @@ public class DCCharacter{
     @Positive 
     private Integer age;
 
+    private String firstAppearance;
+
+    @NotNull
+    @NotBlank 
+    private String background;
+
+    @NotNull
+    @NotBlank 
+    private String personality;
+
     public DCCharacter(){
 
     }
@@ -68,10 +78,28 @@ public class DCCharacter{
         this.age = age;
     }
 
-    
+    public String getFirstAppearance() {
+        return firstAppearance;
+    }
 
+    public void setFirstAppearance(String firstAppearance) {
+        this.firstAppearance = firstAppearance;
+    }
     
+    public String getBackground() {
+        return background;
+    }
 
-    
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public String getPersonality() {
+        return personality;
+    }
+
+    public void setPersonality(String personality) {
+        this.personality = personality;
+    }
 
 }

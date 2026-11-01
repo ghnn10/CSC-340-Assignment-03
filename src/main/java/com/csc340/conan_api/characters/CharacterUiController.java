@@ -33,8 +33,18 @@ public class CharacterUiController {
 
     @GetMapping("/{id}")
     public String details(@PathVariable Long id, Model model) {
-        DCCharacter character = service.findById(id);
-        model.addAttribute("myChar", character);
+        DCCharacter myChar = service.findById(id);
+        model.addAttribute("myChar", myChar);
         return "details";
     }
+
+    @GetMapping("/new")
+    public String newForm(Model model){
+        DCCharacter myChar = new DCCharacter();
+        model.addAttribute("myChar",myChar);
+        model.addAttribute("formTitle","Add a Character");
+        model.addAttribute("formAction", "/characters");
+        return "character-form";
+    }
+
 }

@@ -13,7 +13,7 @@
                 integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
                 crossorigin="anonymous">
             <link rel="stylesheet" href="/css/styles.css">
-            <link rel="icon" type="image/svg+xml" href="./img/gpu-card.svg">
+            <link rel="icon" type="image/svg+xml" href="/thumbnails/gpu-card.svg">
         </head>
 
         <body class="content">
@@ -32,13 +32,10 @@
                                 <a class="nav-link ${(active == 'home')?then('active', '')}" href="/characters">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link ${(active == 'details')?then('active', '')}" href="/characters">Details</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link ${(active == 'about')?then('active', '')}" href="/characters/about">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">Add a Character</a>
+                                <a class="nav-link ${(active == 'new')?then('active', '')}" href="/characters/new">Add a Character</a>
                             </li>
                         </ul>
                     </div>

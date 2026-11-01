@@ -30,7 +30,7 @@
             </div>
 
             <div class="mb-3" style="color: rgb(165, 167, 168);">
-                Showing <span style="font-weight: bold;">5</span> character(s)
+                Showing <span class="count" style="font-weight: bold;">${myChars?size}</span> character(s)
             </div>
 
 
@@ -38,11 +38,11 @@
                 <#list myChars as myChar>
                     <div class="col-md-6 col-lg-4 mb-3" id="charactersCard">
                         <div class="card h-100 shadow-sm">
-                            <img src="/thumbnails/character_${myChar.id?c}.jpg" class="card-img-top p-3 rounded-4 custom-fit" alt="Shinichi Kudo">
+                            <img src="/thumbnails/character_${myChar.id?c}.jpg" class="card-img-top p-3 rounded-4 custom-fit" alt="${myChar.id?c}">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">${myChar.name}</h5>
                                 <p class="text-muted small mb-2 "><strong>Universe:</strong> Detective Conan</p>
-                                <p><span class="badge rounded-pill">${myChar.roles?lower_case?cap_first}</span></p>
+                                <p><span class="badge rounded-pill">${myChar.roles}</span></p>
                                 <p class="card-text">${myChar.description}</p>
                                 <a href="/characters/${myChar.id?c}" class="btn btn-custom w-100">View Details</a>
                             </div>
