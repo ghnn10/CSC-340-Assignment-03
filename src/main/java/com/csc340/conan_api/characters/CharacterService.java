@@ -1,13 +1,21 @@
 package com.csc340.conan_api.characters;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Service
 public class CharacterService {
     
     private final CharacterRepository repository;
+
+    private static final String UPLOAD_DIR = "src/main/resources/static/thumbnails/";
 
     public CharacterService(CharacterRepository repository){
         this.repository = repository;
@@ -61,5 +69,21 @@ public class CharacterService {
     public void delete(Long id){
         findById(id);   // throws 404 if missing
         repository.deleteById(id);
+    }
+
+    public void saveThumbnail(DCCharacter dcCharacter, MultipartFile file) {
+        String originalFileName = file.getOriginalFilename();
+        try {
+            String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+            String newFileName = "character_" + dcCharacter.getId() + "." + fileExtension;
+            Path path = Paths.get(UPLOAD_DIR + newFileName);
+            InputStream inputStream = file.getInputStream();
+            Files.createDirectories(Paths.get(UPLOAD_DIR)); // Ensure the directory exists
+            Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
+            dcCharacter.setThumbnailUrl( newFileName);
+            repository.save(dcCharacter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

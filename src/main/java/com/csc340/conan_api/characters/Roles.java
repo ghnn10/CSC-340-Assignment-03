@@ -5,7 +5,8 @@ public enum Roles {
     CIVILIAN("Civilian"),
     FBI("FBI"),
     BLACK_ORGANIZATION("Black Organization"),
-    POLICE("Police");
+    POLICE("Police"),
+    OTHER("Others...");
 
 
     private final String displayName;

@@ -1,5 +1,5 @@
 <#import "layout.ftlh" as l>
-    <@l.page title=formTitle active=(myChar.id??)?then('', 'new' )>
+    <@l.page title=formTitle >
         <div class="container-lg py-5">
             <!--Page header-->
             <div class="page-header text-center mt-3 mb-5 pb-4 pt-4 border-bottom">
@@ -13,55 +13,68 @@
                             <h5 class="card-title fw-bold mb-4 text-center">Character information</h5>
                             <form method="post" action="${formAction}" enctype="multipart/form-data" class="form">
                                 <div class="mb-3">
-                                    <label for="characterName" class="form-label fw-bold">Character name*</label>
-                                    <input type="text" class="form-control" required id="characterName"
+                                    <label for="name" class="form-label fw-bold">Character name*</label>
+                                    <input type="text" class="form-control" name="name" value="${(myChar.name)!''}" required id="name"
                                         placeholder="eg., Kaitou Kid">
                                     <small class="form-text text-muted">The name of your character</small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="characterAge" class="form-label fw-bold">Character Age</label>
-                                    <input type="number" class="form-control" required id="characterAge">
+                                    <label for="age" class="form-label fw-bold">Character Age</label>
+                                    <input type="number" class="form-control" name="age" value="${(myChar.age)!''}" id="age">
                                     <small class="form-text text-muted">Age of character if they still alive in
                                         manga</small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="characterRole" class="form-label fw-bold">Role*</label>
-                                    <select name="characterRole" id="characterRole" class="form-select" required>
-                                        <option value>-- Select a role --</option>
-                                        <option value="Detective">Detective</option>
-                                        <option value="Police">Police</option>
-                                        <option value="Civilan">Civilan</option>
-                                        <option value="Black Organization">Black Organization</option>
-                                        <option value="FBI">FBI</option>
-                                        <option value="Others">Others...</option>
+                                    <label for="roles" class="form-label fw-bold">Roles*</label>
+                                    <#assign current=(myChar.roles?string)!''>
+                                    <select id="roles" name="roles" class="form-select" required>
+                                        <option value="">-- Select a role --</option>
+                                        <option value="DETECTIVE" <#if current=='DETECTIVE'>selected</#if>>Detective</option>
+                                        <option value="POLICE" <#if current=='POLICE'>selected</#if>>Police</option>
+                                        <option value="CIVILAN" <#if current=='CIVILAN'>selected</#if>>Civilan</option>
+                                        <option value="BLACK_ORGANIZATION" <#if current=='BLACK_ORGANIZATION'>selected</#if>>Black Organization</option>
+                                        <option value="FBI" <#if current=='FBI'>selected</#if>>FBI</option>
+                                        <option value="OTHER" <#if current=='OTHER'>selected</#if>>Others...</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="characterImg" class="form-label fw-bold">Image URL*</label>
-                                    <input class="form-control" type="file" id="characterImg" required>
+                                    <label for="imageFile" class="form-label fw-bold">Image URL*</label>
+                                    <#if myChar.id??>
+                                        <img class="thumb" src="/characters/${myChar.id?c}/image" alt="Current picture">
+                                    </#if>
+                                    <input id="imageFile" name="imageFile" type="file" accept="image/jpeg,image/png,image/webp">
                                     <small class="form-text text-muted">Link to a character image (Accepted: JPG,
                                         PNG)</small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="characterDescription" class="form-label fw-bold">Short
-                                        description*</label>
-                                    <textarea class="form-control" id="characterDescription" name="characterDescription"
+                                    <label for="description" class="form-label fw-bold">Short description*</label>
+                                    <textarea class="form-control" id="description" name="description"
                                         rows="3" required
-                                        placeholder="Describe the character in 1-2 sentences..."></textarea>
+                                        placeholder="Describe the character in 1-2 sentences...">${(myChar.description)!''}</textarea>
                                     <small class="form-text text-muted">A brief summary of the character</small>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="characterFirstAppearance" class="form-label fw-bold">First
+                                    <label for="firstAppearance" class="form-label fw-bold">First
                                         Apperance</label>
-                                    <input type="text" class="form-control" required id="characterName"
+                                    <input type="text" class="form-control" name="firstAppearance" id="firstAppearance"
                                         placeholder="eg., Manga: File 287, Anime: Episode 230">
                                     <small class="form-text text-muted">When/where did this character first
                                         appear?</small>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="background" class="form-label fw-bold">Background</label>
+                                    <textarea class="form-control" name="background" id="background" rows="3">${(myChar.background)!''}</textarea>
+                                    <small class="form-text text-muted">A little bit about character background: family, career...</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="personality" class="form-label fw-bold">Personality</label>
+                                    <textarea class="form-control" name="personality" id="personality" rows="3">${(myChar.personality)!''}</textarea>
+                                    <small class="form-text text-muted">Character personality</small>
+                                </div>
                                 <div class="actions">
                                     <button id="form-submit-btn" type="submit" class="btn mb-2">Save</button>
                                     <#if myChar.id??>
-                                        <a href="/characters/myCharId?c" id="form-cancel-btn" type="button"
+                                        <a href="/characters/${myChar.id?c}" id="form-cancel-btn" type="button"
                                             class="btn btn-outline-secondary">Cancel</a>
                                         <#else>
                                         <a href="/characters" id="form-cancel-btn" type="button"

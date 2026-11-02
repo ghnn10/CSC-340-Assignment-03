@@ -30,13 +30,13 @@ public class DCCharacter{
 
     private String firstAppearance;
 
-    @NotNull
-    @NotBlank 
+    @Column(columnDefinition = "TEXT")
     private String background;
 
-    @NotNull
-    @NotBlank 
+    @Column(columnDefinition = "TEXT")
     private String personality;
+
+    private String thumbnailUrl;
 
     public DCCharacter(){
 
@@ -100,6 +100,14 @@ public class DCCharacter{
 
     public void setPersonality(String personality) {
         this.personality = personality;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
 }
