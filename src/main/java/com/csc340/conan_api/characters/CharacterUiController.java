@@ -25,11 +25,11 @@ public class CharacterUiController {
 
     @GetMapping
     public String gallery(@RequestParam(required = false) String name,
-      @RequestParam(required = false) Roles roles, Model model) {
-        model.addAttribute("myChars", service.search(name, roles));
+      @RequestParam(required = false) Roles role, Model model) {
+        model.addAttribute("myChars", service.search(name, role));
         model.addAttribute("name", name == null ? "" : name);
-        model.addAttribute("selectedRole", roles == null ? "" : roles.name());
-        return "index"; // templates/index.ftlh
+        model.addAttribute("selectedRole", role == null ? "" : role.name());
+        return "index";
     }
 
     @GetMapping("/about")
@@ -39,9 +39,16 @@ public class CharacterUiController {
 
     @GetMapping("/{id}")
     public String details(@PathVariable Long id, Model model) {
-        DCCharacter myChar = service.findById(id);
-        model.addAttribute("myChar", myChar);
-        return "details";
+        try{
+            DCCharacter myChar = service.findById(id);
+            model.addAttribute("myChar", myChar);
+            return "details";
+        } catch (RuntimeException exception) {
+            model.addAttribute("errorMessage",
+                exception.getMessage() == null ? "Character not found" : exception.getMessage());
+            return "error";
+    }
+
     }
 
     @GetMapping("/new")

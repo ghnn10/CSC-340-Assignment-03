@@ -28,6 +28,7 @@ body {
 .gray-content{
     color:rgb(107 114 128);
 }
+
 .card{
     background-color: #d8d8d8;
 }
@@ -69,10 +70,6 @@ body {
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
-}
-
-#filterBox:hover{
-    box-shadow: 2px 2px 2px 2px #e8eaec;
 }
 
 .search-bar{

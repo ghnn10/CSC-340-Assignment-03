@@ -45,7 +45,7 @@ public class CharacterService {
         boolean hasName = name != null && !name.isBlank();
 
         if(hasName && roles != null){
-            return repository.findByNameContainingIgnoreCaseAndRoles(name,roles);
+            return repository.findByNameContainingIgnoreCaseAndRoles(name.trim(),roles);
         }
         if(hasName){
             return repository.findByNameContainingIgnoreCase(name.trim());
@@ -63,6 +63,9 @@ public class CharacterService {
         existing.setRoles(updated.getRoles());
         existing.setDescription(updated.getDescription());
         existing.setAge(updated.getAge());
+        existing.setBackground(updated.getBackground());
+        existing.setPersonality(updated.getPersonality());
+        existing.setFirstAppearance(updated.getFirstAppearance());
         return repository.save(existing);
     }
 

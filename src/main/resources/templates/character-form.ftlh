@@ -38,12 +38,12 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imageFile" class="form-label fw-bold">Image URL*</label>
+                                    <label for="imageFile" class="form-label fw-bold">Image URL*</label><br>
                                     <#if myChar.id??>
-                                        <img class="img-fluid rounded mb-5 custom-fit" src="/characters/${myChar.id?c}/image" alt="Current picture">
+                                        <img class="img-fluid rounded mb-3 custom-fit" style="width: 200px; height: 200px;" src="/characters/${myChar.id?c}/image" alt="Current picture">
                                     </#if>
-                                    <input id="imageFile" name="imageFile" type="file" accept="image/jpeg,image/png,image/webp">
-                                    <small class="form-text text-muted">Link to a character image (Accepted: JPG,
+                                    <br><input id="imageFile" name="imageFile" type="file" accept="image/jpeg,image/png,image/webp">
+                                    <br><small class="form-text text-muted">Link to a character image (Accepted: JPG,
                                         PNG)</small>
                                 </div>
                                 <div class="mb-3">
