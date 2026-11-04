@@ -42,6 +42,12 @@
                 Showing <span class="count" style="font-weight: bold;">${myChars?size}</span> character(s)
             </div>
 
+            <#if successMessage??>
+                <div class="alert alert-success alert-dismissible fade show container mt-3" role="alert">
+                    ${successMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </#if>
 
             <div class="row">
                 <#list myChars as myChar>

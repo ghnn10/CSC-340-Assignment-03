@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 
@@ -61,17 +62,20 @@ public class CharacterUiController {
     }
 
     @PostMapping
-    public String createCharacter(@Valid @ModelAttribute DCCharacter dcCharacter, MultipartFile imageFile) {
+    public String createCharacter(@Valid @ModelAttribute DCCharacter dcCharacter, 
+        MultipartFile imageFile, RedirectAttributes redirectAttributes) {
         DCCharacter createdChar = service.create(dcCharacter);
         if (imageFile != null && !imageFile.isEmpty()) {
             service.saveThumbnail(createdChar, imageFile);
         }
+        redirectAttributes.addFlashAttribute("successMessage","Character added successfully!");
         return "redirect:/characters/" + createdChar.getId();
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteCharacter(@PathVariable Long id){
+    public String deleteCharacter(@PathVariable Long id, RedirectAttributes redirectAttributes){
         service.delete(id);
+        redirectAttributes.addFlashAttribute("successMessage","Character deleted successfully!");
         return "redirect:/characters";
     }
 
@@ -94,11 +98,13 @@ public class CharacterUiController {
     }
 
     @PostMapping("{id}")
-    public String updateCharacter(@PathVariable Long id, DCCharacter dcCharacter, MultipartFile imageFile){
+    public String updateCharacter(@PathVariable Long id, DCCharacter dcCharacter, 
+        MultipartFile imageFile, RedirectAttributes redirectAttributes){
         DCCharacter updatedCharacter = service.update(id, dcCharacter);
         if (imageFile != null && !imageFile.isEmpty()) {
             service.saveThumbnail(updatedCharacter, imageFile);
         }
+        redirectAttributes.addFlashAttribute("successMessage", "Character updated successfully!");
         return "redirect:/characters/" + updatedCharacter.getId();
     }
 

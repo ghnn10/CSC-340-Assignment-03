@@ -1,5 +1,11 @@
 <#import "layout.ftlh" as l>
     <@l.page title="Character details" active="details">
+        <#if successMessage??>
+            <div class="alert alert-success alert-dismissible fade show container mt-3" role="alert">
+                ${successMessage}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </#if>
         <div class="container-lg py-5">
             <a href="/characters" type="button" class="btn mb-4" id="back-btn">← Back to gallery</a>
             <div class="row">
@@ -29,15 +35,17 @@
                 </div>
                 <div class="actions">
                     <div class="d-flex gap-3">
-                        <a href="/characters/${myChar.id?c}/edit" type="button" class="btn mb-4" id="back-btn" style="width: 120px;">
+                        <a href="/characters/${myChar.id?c}/edit" type="button" class="btn mb-4" id="back-btn"
+                            style="width: 120px;">
                             Edit
                         </a>
-                        <form method="post" action="/characters/${myChar.id?c}/delete" onsubmit="return confirm('Remove this character?');">
+                        <form method="post" action="/characters/${myChar.id?c}/delete"
+                            onsubmit="return confirm('Remove this character?');">
                             <button type="submit" class="btn mb-4 btn-danger" style="width: 120px;">Delete</button>
                         </form>
                     </div>
                 </div>
-                
+
             </div>
 
         </div>
