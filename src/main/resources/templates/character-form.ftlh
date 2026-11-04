@@ -1,5 +1,5 @@
 <#import "layout.ftlh" as l>
-    <@l.page title=formTitle >
+    <@l.page title=formTitle active=(myChar.id??)?then('','new')>
         <div class="container-lg py-5">
             <!--Page header-->
             <div class="page-header text-center mt-3 mb-5 pb-4 pt-4 border-bottom">
@@ -29,18 +29,18 @@
                                     <#assign current=(myChar.roles?string)!''>
                                     <select id="roles" name="roles" class="form-select" required>
                                         <option value="">-- Select a role --</option>
-                                        <option value="DETECTIVE" <#if current=='DETECTIVE'>selected</#if>>Detective</option>
-                                        <option value="POLICE" <#if current=='POLICE'>selected</#if>>Police</option>
-                                        <option value="CIVILAN" <#if current=='CIVILAN'>selected</#if>>Civilan</option>
-                                        <option value="BLACK_ORGANIZATION" <#if current=='BLACK_ORGANIZATION'>selected</#if>>Black Organization</option>
+                                        <option value="DETECTIVE" <#if current=='Detective'>selected</#if>>Detective</option>
+                                        <option value="POLICE" <#if current=='Police'>selected</#if>>Police</option>
+                                        <option value="CIVILIAN" <#if current=='Civilian'>selected</#if>>Civilian</option>
+                                        <option value="BLACK_ORGANIZATION" <#if current=='Black Organization'>selected</#if>>Black Organization</option>
                                         <option value="FBI" <#if current=='FBI'>selected</#if>>FBI</option>
-                                        <option value="OTHER" <#if current=='OTHER'>selected</#if>>Others...</option>
+                                        <option value="OTHER" <#if current=='Other'>selected</#if>>Other</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="imageFile" class="form-label fw-bold">Image URL*</label>
                                     <#if myChar.id??>
-                                        <img class="thumb" src="/characters/${myChar.id?c}/image" alt="Current picture">
+                                        <img class="img-fluid rounded mb-5 custom-fit" src="/characters/${myChar.id?c}/image" alt="Current picture">
                                     </#if>
                                     <input id="imageFile" name="imageFile" type="file" accept="image/jpeg,image/png,image/webp">
                                     <small class="form-text text-muted">Link to a character image (Accepted: JPG,

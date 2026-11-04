@@ -38,7 +38,7 @@
                 <#list myChars as myChar>
                     <div class="col-md-6 col-lg-4 mb-3" id="charactersCard">
                         <div class="card h-100 shadow-sm">
-                            <img src="/thumbnails/character_${myChar.id?c}.jpg" class="card-img-top p-3 rounded-4 custom-fit" alt="${myChar.id?c}">
+                            <img src="/thumbnails/${(myChar.thumbnailUrl)!'character-placeholder.svg'}" class="card-img-top p-3 rounded-4 custom-fit" alt="${myChar.id?c}">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">${myChar.name}</h5>
                                 <p class="text-muted small mb-2 "><strong>Universe:</strong> Detective Conan</p>

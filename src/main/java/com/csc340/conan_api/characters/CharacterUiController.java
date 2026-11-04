@@ -2,6 +2,7 @@ package com.csc340.conan_api.characters;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,11 +55,44 @@ public class CharacterUiController {
 
     @PostMapping
     public String createCharacter(@Valid @ModelAttribute DCCharacter dcCharacter, MultipartFile imageFile) {
-            DCCharacter createdChar = service.create(dcCharacter);
-            if (imageFile != null && !imageFile.isEmpty()) {
-                service.saveThumbnail(createdChar, imageFile);
-            }
+        DCCharacter createdChar = service.create(dcCharacter);
+        if (imageFile != null && !imageFile.isEmpty()) {
+            service.saveThumbnail(createdChar, imageFile);
+        }
         return "redirect:/characters/" + createdChar.getId();
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteCharacter(@PathVariable Long id){
+        service.delete(id);
+        return "redirect:/characters";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editForm(@PathVariable Long id, Model model){
+        DCCharacter myChar = service.findById(id);
+        model.addAttribute("myChar", myChar);
+        model.addAttribute("formTitle", "Edit Character");
+        model.addAttribute("formAction", "/characters/"+id);
+        return "character-form";
+    }
+
+    @GetMapping("/{id}/image")
+    public String getImg(@PathVariable Long id){
+        DCCharacter myChar = service.findById(id);
+        if (myChar != null && myChar.getThumbnailUrl() != null && !myChar.getThumbnailUrl().isEmpty()) {
+            return "redirect:/thumbnails/" + myChar.getThumbnailUrl();
+        }
+        return "redirect:/thumbnails/character-placeholder.svg";
+    }
+
+    @PostMapping("{id}")
+    public String updateCharacter(@PathVariable Long id, DCCharacter dcCharacter, MultipartFile imageFile){
+        DCCharacter updatedCharacter = service.update(id, dcCharacter);
+        if (imageFile != null && !imageFile.isEmpty()) {
+            service.saveThumbnail(updatedCharacter, imageFile);
+        }
+        return "redirect:/characters/" + updatedCharacter.getId();
     }
 
 }
