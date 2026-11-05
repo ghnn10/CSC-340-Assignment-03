@@ -4,6 +4,8 @@
 
 A REST API for exploring characters in Detective Conan Manga, built with Spring Boot using a layered architecture. Data is stored in PostgreSQL (Neon).
 
+Live URL on Render: [https://detective-conan-characters.onrender.com/characters]
+
 ## Feature
 
 - Create, read, update, and delete characters.
@@ -179,7 +181,7 @@ ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-jar", "app.jar"]
 2. Push the repository to GitHub.
 3. In Render, create a **Web Service**, connect the repo, choose the **Docker** runtime and the **Free** instance type.
 4. Add the  `SPRING_DATASOURCE_URL` environment variable (value only, no quotes).
-5. Deploy, then open `https://detective-conan-characters.onrender.com/api/characters`
+5. Deploy, then open `https://detective-conan-characters.onrender.com/characters`
 
 ### Free-tier notes
 
