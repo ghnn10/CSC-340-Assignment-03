@@ -38,7 +38,7 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="imageFile" class="form-label fw-bold">Image URL*</label><br>
+                                    <label for="imageFile" class="form-label fw-bold">Image URL</label><br>
                                     <#if myChar.id??>
                                         <img class="img-fluid rounded mb-3 custom-fit" style="width: 200px; height: 200px;" src="/characters/${myChar.id?c}/image" alt="Current picture">
                                     </#if>

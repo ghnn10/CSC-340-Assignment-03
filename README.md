@@ -9,6 +9,8 @@ A REST API for exploring characters in Detective Conan Manga, built with Spring 
 - Create, read, update, and delete characters.
 - Partial, case-insensitive search by name.
 - Filter by role requirements.
+- Browse, add, view, edit and delete characters through a server-rendered web interface.
+- Upload character picture, character without a picture use a placeholder. 
 - Been validation with clear HTTP status code (400, 404).
 - Configured entirely through environment variables (no secrets in the repo).
 
@@ -28,17 +30,15 @@ Generate a starter project at [start.spring.io](https://start.spring.io) with : 
 The app uses four layers. Each layer talks only to the one below it. 
 
 ```
-HPPT request
-    |
-Controller    - maps URLs to methods, validates input, returns HTTP responses
-    |
-Service       - business logic and orchestration, throws domain exceptions
-    |
-Repository    - data access (Spring Data JPA), generates SQL
-    |
-Entity        - Java class mapped to the `characters` table
-    |
-PostgreSQL (Neon)
+Browser -- CharacterUiController -- FreeMarker templates (HTML)
+                  |
+JSON client -- CharacterController
+                  |
+             CharacterService
+                  |
+          CharacterRepository (JPA)
+                  |
+          DCCharacter entity / PostgreSQL (Neon)
 ```
 
 ### Project Structure
@@ -46,6 +46,7 @@ PostgreSQL (Neon)
 ```
 src/main/java/com/csc340/conan_api/characters/
     CharacterController.java
+    CharacterUiController.java
     CharacterService.java
     CharacterRepository.java
     DCCharacter.java
@@ -53,7 +54,33 @@ src/main/java/com/csc340/conan_api/characters/
     CharacterNotFoundException.java
 src/main/resources/
     application.properties
+    templates/                 FreeMarker views for the MVC interface
+        about.ftlh
+        character-form.ftlh
+        details.ftlh
+        error.ftlh
+        index.ftlh
+        layout.ftlh
+    static/css/styles.css      Web interface styles
+    static/thumbnails/         Uploaded pictures and placeholder image
 ```
+
+## MVC Web Interface
+
+Start the application and open `http://localhost:8080/` to use the browser interface.
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/characters` | Character gallery; optional filter with `name` and `role` query parameters |
+| GET | `/characters/new` | Show the add character form |
+| POST | `/characters` | Create a character and optionally upload its picture, age, first appearance, background and personality |
+| GET | `/characters/{id}` | Show character details |
+| GET | `/characters/{id}/edit` | Show the edit character form |
+| POST | `/characters/{id}` | Update character detail |
+| POST | `/characters/{id}/delete` | Delete a character |
+| GET | `/characters/about` | Explain the application and its request flow |
+
+Character pictures are served from `/thumbnails/`; wher a character has no picture, the interface displays `character-placeholder.svg`
 
 
 ## Data Model
@@ -65,8 +92,13 @@ src/main/resources/
 | `id` | Long | Generated automatically |
 | `name` | String | Required, not blank |
 | `description` | String | Required, not blank |
-| `roles` | Enum: `DETECTIVE`, `FBI`, `CIVILIAN`, `BLACK_ORGANIZATION`, `POLICE` | Required |
+| `roles` | Enum: `DETECTIVE`, `FBI`, `CIVILIAN`, `BLACK_ORGANIZATION`, `POLICE`, `OTHER` | Required |
 | `age ` | Integer | Must be positive if not null |
+| `thumbnailUrl` | String | Optional uploaded picture filename |
+| `background` | String | Optional character background |
+| `personality` | String | Optional character personality |
+| `firstAppearance` | String | Optional character first appearance |
+
 
 ## API Reference
 
@@ -88,6 +120,7 @@ Base path: `/api/characters`
 |-----------|---------|----------|
 | `name` | `?name=a` | Partial, case-insensitive match ('a' finds "Takagi Wataru", and "Akai Shuichi") |
 | `roles` | `?roles=FBI` | Exact match on  `DETECTIVE`, `FBI`, `CIVILIAN`, `BLACK_ORGANIZATION`, or `POLICE` |
+| both | `?name=qa&role=POLICE` | Both filter must match |
 
 Blank or missing parameters are ignored.
 
@@ -114,6 +147,15 @@ Content-Type: application/json
 | 204 | Deleted, no content |
 | 400 | Validation failed or malformed request (for example, an invalid `roles` value) |
 | 404 | Character with that id does not exist |
+
+## Configuration
+
+The app reads its database settings from environment variables. Spring Boot maps these names automatically, so nothing secret is stored in `application.properties`.
+
+| Variable | Example |
+|----------|---------|
+| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://<neon-host>/<db>?sslmode=require` |
+| `PORT` | Set by Render; defaults to `8080` locally |
 
 
 ## Deployment (Render)

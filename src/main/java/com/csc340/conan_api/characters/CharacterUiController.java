@@ -47,7 +47,7 @@ public class CharacterUiController {
         } catch (RuntimeException exception) {
             model.addAttribute("errorMessage",
                 exception.getMessage() == null ? "Character not found" : exception.getMessage());
-            return "error";
+        return "error";
     }
 
     }

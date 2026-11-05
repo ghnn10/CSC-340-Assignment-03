@@ -1,19 +1,27 @@
 <#import "layout.ftlh" as l>
     <@l.page title="About" active="about">
         <div class="page-header text-center mt-3 mb-5 pb-4 pt-4 border-bottom">
-            <h1 class="title-text">Welcome to Detective Conan Gallery</h1>
-            <p class="gray-content">With over a thousand manga chapters and dozens of movies, the Case Closed universe is massive. Explore these quick, easy-to-read profiles covering everyone from genius high school detectives to elusive Black Organization members, ensuring you never miss a beat in the ongoing mystery.</p>
+            <h1 class="title-text">About this app</h1>
+            <p class="gray-content">Detective Conan Character Gallery demo. This app use FreeMarker MVC with Thymleaf
+                template to render pages from server by calling service layer directly, every template use the shared resource <code>layout.ftlh</code></p>
         </div>
         <div class="container-lg py-5">
             <div class="row mb-5">
                 <div class="col-lg-8 mb-4 mb-lg-0">
-                    <h2 class="mb-4 title-text" style="text-align: center;">The story</h2>
-                    <p class="story-detail light-content">The plot of Detective Conan follows Shinichi Kudo, a brilliant high school detective who is transformed into a young child after a brush with a dangerous criminal syndicate. While investigating a pair of suspicious men in black, Shinichi is ambushed and forced to ingest an experimental, untested poison called APTX 4869. Instead of killing him, the drug has a rare side effect that de-ages his body to the size of a seven-year-old while leaving his intellect fully intact. 
-                    <br>To protect those around him from the syndicate, he adopts the alias Conan Edogawa and moves in with his childhood friend, Ran Mouri, and her bumbling private investigator father, Kogoro Mouri. Conan continues to solve crimes behind the scenes to avoid detection. At school, he forms a group, the Detective Boys, with several classmates to solve smaller mysteries, later joined by Ai Haibara, a former member of the syndicate who also shrunk herself to escape.
-                    <br>The overarching narrative focuses on Conan's hunt for the Black Organization. He works to intercept their operations and gather intelligence on their hierarchy, often collaborating with law enforcement institutions, in the hopes of finding a permanent cure to regain his original body.</p>
+                    <h2 class="mb-4 title-text" style="text-align: center;">How a page request flows</h2>
+                    <div class="story-detail light-content">
+                        <ol>
+                            <li>The browser requests a URL, for example <code>/characters/1</code>.</li>
+                            <li>A <code>@Controller</code> method runs, asks the service for data, and puts it in the
+                                <code>Model</code>.</li>
+                            <li>The controller returns a view name. Spring renders the matching FreeMarker template.</li>
+                            <li>The browser receives HTML.</li>
+                        </ol>
+                    </div>
                 </div>
                 <div class="col-lg-4">
-                    <img class="about-thumbnail-img" src="/thumbnails/about.jpg">
+                    <img class="about-thumbnail-img" src="/thumbnails/character-placeholder.svg"
+                        alt="Illustration of a character">
                 </div>
             </div>
             <div class="text-white p-5 rounded mt-5 text-center" style="background-color: rgb(134 239 172);">
